@@ -28,10 +28,10 @@ export class SketchInfo extends HTMLElement {
 
   connectedCallback() {
     if (!this.hasAttribute('closed')) {
-      this.setAttribute('closed', true)
+      this.setAttribute('closed', ''); // Sets attribute closed to true as default.
     }
 
-    this._upgradeProperty('closed')
+    this._upgradeProperty('closed');
   }
 
   /* _upgradeProperty() captures the value from the unupgraded
@@ -47,5 +47,18 @@ export class SketchInfo extends HTMLElement {
       delete this[prop];
       this[prop] = value;
     }
+  }
+
+  set closed(value) {
+    const isClosed = Boolean(value);
+    if (isClosed) {
+      this.setAttribute('closed', '');
+    } else {
+      this.removeAttribute('closed');
+    }
+  }
+
+  get closed() {
+    return this.hasAttribute('closed')
   }
 }
