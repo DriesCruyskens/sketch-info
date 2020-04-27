@@ -1,37 +1,24 @@
-import { html, css, LitElement } from 'lit-element';
+const template = document.createElement('template');
+  template.innerHTML = `
+  <style>
+    :host {
+      display: block;
+      contain: content;
+    }
 
-export class SketchInfo extends LitElement {
-  static get styles() {
-    return css`
-      :host {
-        display: block;
-        padding: 25px;
-        color: var(--sketch-info-text-color, #000);
-      }
-    `;
-  }
+    :host([hidden]) {
+      display: none;
+    }
+  </style>
+  
+  <slot name='title'>Info</slot>
+  <slot></slot>
+  `;
 
-  static get properties() {
-    return {
-      title: { type: String },
-      counter: { type: Number },
-    };
-  }
-
+export class SketchInfo extends HTMLElement {
   constructor() {
     super();
-    this.title = 'Hey there';
-    this.counter = 5;
-  }
-
-  __increment() {
-    this.counter += 1;
-  }
-
-  render() {
-    return html`
-      <h2>${this.title} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
-    `;
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 }

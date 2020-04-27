@@ -4,26 +4,17 @@
   <meta charset="utf-8">
   <style>
     body {
-      background: #fafafa;
+      background: #DDD;
     }
   </style>
 </head>
 <body>
-  <div id="demo"></div>
+  <script type="module" src="../sketch-info.js"></script>
 
-  <script type="module">
-    import { html, render } from 'lit-html';
-    import '../sketch-info.js';
-
-    const title = 'Hello owc World!';
-    render(
-      html`
-        <sketch-info .title=${title}>
-          some more light-dom
-        </sketch-info>
-      `,
-      document.querySelector('#demo')
-    );
-  </script>
+  <sketch-info>
+    <h1 slot="title">Title</h1>
+    <p>This is a test paragraph</p>
+    <p>This is another test paragraph</p>
+  </sketch-info>
 </body>
 </html>
