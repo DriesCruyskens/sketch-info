@@ -1,7 +1,7 @@
 {
   "name": "sketch-info",
   "version": "0.0.0",
-  "description": "Webcomponent sketch-info following open-wc recommendations",
+  "description": "Webcomponent sketch-info for displaying more information on my generative sketches",
   "author": "sketch-info",
   "license": "MIT",
   "main": "index.js",
