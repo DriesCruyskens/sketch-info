@@ -30,5 +30,22 @@ export class SketchInfo extends HTMLElement {
     if (!this.hasAttribute('closed')) {
       this.setAttribute('closed', true)
     }
+
+    this._upgradeProperty('closed')
+  }
+
+  /* _upgradeProperty() captures the value from the unupgraded
+     instance and deletes the property so it does not shadow the 
+     custom element's own property setter. This way, when the 
+     element's definition does finally load, it can immediately
+      reflect the correct state. As per Google's best practices on
+      Web Components.
+  */
+  _upgradeProperty(prop) {
+    if (this.hasOwnProperty(prop)) {
+      let value = this[prop];
+      delete this[prop];
+      this[prop] = value;
+    }
   }
 }
