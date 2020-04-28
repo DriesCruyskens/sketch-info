@@ -85,9 +85,9 @@ export class SketchInfo extends HTMLElement {
   }
 
   connectedCallback() {
-    if (!this.hasAttribute('open')) {
+    /* if (!this.hasAttribute('open')) {
       this.setAttribute('open', ''); // Sets attribute open to true as default for developing purposes.
-    }
+    } */
 
     this._upgradeProperty('open');
 
