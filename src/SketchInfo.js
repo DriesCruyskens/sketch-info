@@ -4,6 +4,8 @@ const template = document.createElement('template');
     :host {
       /* Using system fonts for performance. */
       font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    
+      contain: content;
     }
 
     :host([hidden]) {
@@ -16,10 +18,12 @@ const template = document.createElement('template');
       background: none;
       text-decoration: none;
       border: none;
+      outline: none;
     }
 
     .info-icon {
       opacity: .4;
+      width: var(--info-icon-width, auto);
     }
 
     .info-icon:hover {
@@ -37,12 +41,19 @@ const template = document.createElement('template');
       position: absolute;
       left: 0;
       top: 50%;
-      transform: translateY(-50%);
-
+      transform: translate(0, -50%);
+      overflow-y: auto;
       max-height: 50%;
       max-width: 35%;
+
       background: var(--info-content-bg, #222);
       color: var(--info-content-color, white);
+
+      transition: transform .4s ease-in-out;
+    }
+
+    :host(:not([open])) #info-content {
+      transform: translate(-100%, -50%); 
     }
 
     ::slotted(h1) {
@@ -69,6 +80,8 @@ export class SketchInfo extends HTMLElement {
     super();
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    this.infoBtn = this.shadowRoot.querySelector(".info-btn")
   }
 
   connectedCallback() {
@@ -77,6 +90,17 @@ export class SketchInfo extends HTMLElement {
     }
 
     this._upgradeProperty('open');
+
+    // Binding SketchInfo's 'this' to toggleInfo so it can reference attributes.
+    this.infoBtn.addEventListener("click", this.toggleInfo.bind(this));
+  }
+
+  toggleInfo() {
+    if (this.hasAttribute("open")) {
+      this.open = false;
+    } else {
+      this.open = true;
+    }
   }
 
   /* _upgradeProperty() captures the value from the unupgraded
@@ -112,5 +136,9 @@ export class SketchInfo extends HTMLElement {
       case 'open':
         // aria attributes
     }
+  }
+
+  disconnectedCallback() {
+    this.infoBtn.removeEventListener("click", this.toggleInfo)
   }
 }

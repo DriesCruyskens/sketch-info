@@ -35,6 +35,11 @@
           "name": "--sketch-info-color",
           "description": "Text color of info content.",
           "type": "Color"
+        },
+        {
+          "name": "--info-icon-width",
+          "description": "Width of the icon to open up the content.",
+          "type": "Length"
         }
       ]
     }
