@@ -12,7 +12,12 @@
           "default": false
         }
       ],
-      "events": [],
+      "events": [
+        {
+          "name": "toggleInfo",
+          "description": "Fires when pressing the info button. Opens/closes the info content."
+        }
+      ],
       "slots": [
         {
           "name": "title",
