@@ -49,7 +49,7 @@ const template = document.createElement('template');
       background: var(--info-content-bg, #222);
       color: var(--info-content-color, white);
 
-      transition: transform .4s ease-in-out;
+      transition: transform .3s ease-in-out;
     }
 
     :host(:not([open])) #info-content {
@@ -134,7 +134,7 @@ export class SketchInfo extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case 'open':
-        // aria attributes
+        // Not used at the moment.
     }
   }
 
