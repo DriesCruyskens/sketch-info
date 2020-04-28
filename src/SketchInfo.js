@@ -2,22 +2,67 @@ const template = document.createElement('template');
   template.innerHTML = `
   <style>
     :host {
-      display: block;
-      contain: content;
+      /* Using system fonts for performance. */
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     }
 
     :host([hidden]) {
       display: none;
     }
+
+    .info-btn {
+      margin: 0;
+      padding: 0;
+      background: none;
+      text-decoration: none;
+      border: none;
+    }
+
+    .info-icon {
+      opacity: .4;
+    }
+
+    .info-icon:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    /* Keep icon black while info is open. */
+    :host([open]) .info-icon {
+      opacity: 1;
+    }
+
+    #info-content {
+      padding: 25px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+
+      max-height: 50%;
+      max-width: 35%;
+      background: var(--info-content-bg, #222);
+      color: var(--info-content-color, white);
+    }
+
+    ::slotted(h1) {
+      margin-top: 0;
+    }
   </style>
+
+  <button class="info-btn">
+    <img class="info-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItaGVscC1jaXJjbGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIj48L2NpcmNsZT48cGF0aCBkPSJNOS4wOSA5YTMgMyAwIDAgMSA1LjgzIDFjMCAyLTMgMy0zIDMiPjwvcGF0aD48bGluZSB4MT0iMTIiIHkxPSIxNyIgeDI9IjEyLjAxIiB5Mj0iMTciPjwvbGluZT48L3N2Zz4="/>
+  </button>
+  <section id="info-content">
+    <slot name='title'>Info</slot>
+    <slot></slot>
+  </section>
   
-  <slot name='title'>Info</slot>
-  <slot></slot>
   `;
 
 export class SketchInfo extends HTMLElement {
   static get observedAttributes() {
-    return ['closed'];
+    return ['open'];
   }
 
   constructor() {
@@ -27,11 +72,11 @@ export class SketchInfo extends HTMLElement {
   }
 
   connectedCallback() {
-    if (!this.hasAttribute('closed')) {
-      this.setAttribute('closed', ''); // Sets attribute closed to true as default.
+    if (!this.hasAttribute('open')) {
+      this.setAttribute('open', ''); // Sets attribute open to true as default for developing purposes.
     }
 
-    this._upgradeProperty('closed');
+    this._upgradeProperty('open');
   }
 
   /* _upgradeProperty() captures the value from the unupgraded
@@ -49,22 +94,22 @@ export class SketchInfo extends HTMLElement {
     }
   }
 
-  set closed(value) {
-    const isClosed = Boolean(value);
-    if (isClosed) {
-      this.setAttribute('closed', '');
+  set open(value) {
+    const isopen = Boolean(value);
+    if (isopen) {
+      this.setAttribute('open', '');
     } else {
-      this.removeAttribute('closed');
+      this.removeAttribute('open');
     }
   }
 
-  get closed() {
-    return this.hasAttribute('closed')
+  get open() {
+    return this.hasAttribute('open')
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
-      case 'closed':
+      case 'open':
         // aria attributes
     }
   }

@@ -6,24 +6,34 @@
       "description": "A component with a title and an action counter",
       "properties": [
         {
-          "name": "title",
-          "type": "String",
-          "description": "The title of your component",
-          "default": "Hey there"
-        },
-        {
-          "name": "counter",
-          "type": "Number",
-          "description": "An action counter",
-          "default": 0
+          "name": "open",
+          "type": "Boolean",
+          "description": "Indicates whether to show the info content or not.",
+          "default": false
         }
       ],
       "events": [],
-      "slots": [],
+      "slots": [
+        {
+          "name": "title",
+          "description": "Displays the title of the infobox.",
+          "default": "Info"
+        },
+        {
+          "name": "",
+          "description": "Displays the leftover content.",
+          "default": ""
+        }
+      ],
       "cssProperties": [
         {
-          "name": "--sketch-info-text-color",
-          "description": "Main Text Color",
+          "name": "--sketch-info-bg",
+          "description": "Background of info content.",
+          "type": "Color"
+        },
+        {
+          "name": "--sketch-info-color",
+          "description": "Text color of info content.",
           "type": "Color"
         }
       ]
