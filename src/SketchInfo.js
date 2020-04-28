@@ -61,4 +61,11 @@ export class SketchInfo extends HTMLElement {
   get closed() {
     return this.hasAttribute('closed')
   }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    switch (name) {
+      case 'closed':
+        // aria attributes
+    }
+  }
 }
