@@ -44,7 +44,7 @@ const template = document.createElement('template');
       transform: translate(0, -50%);
       overflow-y: auto;
       max-height: 50%;
-      max-width: 35%;
+      max-width: 30%;
 
       background: var(--info-content-bg, #222);
       color: var(--info-content-color, white);
