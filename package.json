@@ -1,6 +1,6 @@
 {
   "name": "sketch-info",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Web Component for displaying more information on my generative sketches.",
   "author": "sketch-info",
   "license": "MIT",
