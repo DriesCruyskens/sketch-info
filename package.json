@@ -2,7 +2,7 @@
   "name": "sketch-info",
   "version": "0.0.2",
   "description": "Web Component for displaying more information on my generative sketches.",
-  "author": "sketch-info",
+  "author": "Dries Cruyskens",
   "license": "MIT",
   "main": "index.js",
   "module": "index.js",
